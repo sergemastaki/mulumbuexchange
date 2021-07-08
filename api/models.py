@@ -27,6 +27,7 @@ class Transaction(models.Model):
     code = models.TextField()
     type = models.CharField(choices=Transactions_types.items(), max_length=100)
     state = models.CharField(choices=States_types.items(), default=States_types['EN_COURS'], max_length=100)
+    owner = models.ForeignKey('auth.User', related_name='transactions', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-created']
