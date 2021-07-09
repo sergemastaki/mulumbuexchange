@@ -8,7 +8,14 @@ States_types = {'EN_COURS':'en_cours', 'EXECUTER':'executer', 'ANNULER':'annuler
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    numero = models.CharField(max_length=15)
+    numero = models.CharField(max_length=15, default=0)
+    airtel_money = models.CharField(max_length=15, default=0)
+    orange_money = models.CharField(max_length=15, default=0)
+    africell_money = models.CharField(max_length=15, default=0)
+    mpesa = models.CharField(max_length=15, default=0)
+    equity_bcdc = models.CharField(max_length=20, default=0)
+    uba = models.CharField(max_length=20, default=0)
+    ecobank = models.CharField(max_length=20, default=0)
 
     def __str__(self):
         return str(self.user)
@@ -24,6 +31,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Transaction(models.Model):
     created = models.DateTimeField(auto_now_add=True)
+    montant = models.FloatField()
     code = models.TextField()
     type = models.CharField(choices=Transactions_types.items(), max_length=100)
     state = models.CharField(choices=States_types.items(), default=States_types['EN_COURS'], max_length=100)
@@ -33,4 +41,12 @@ class Transaction(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return str(self.created)
+        return str(self.type)
+
+class Currency(models.Model):
+    name = models.CharField(max_length=50)
+    solde = models.FloatField()
+    owner_profile = models.ForeignKey(Profile, related_name='currencies', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.name)
