@@ -7,8 +7,8 @@ Transactions_types = {'DEPOT':'depot','RETRAIT':'retrait','VENTE':'vente','ACHAT
 States_types = {'EN_COURS':'en_cours', 'EXECUTER':'executer', 'ANNULER':'annuler'}
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    numero = models.CharField(max_length=15, default=0)
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    numero = models.CharField(unique=True, max_length=15)
     airtel_money = models.CharField(max_length=15, default=0)
     orange_money = models.CharField(max_length=15, default=0)
     africell_money = models.CharField(max_length=15, default=0)
