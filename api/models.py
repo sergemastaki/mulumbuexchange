@@ -31,7 +31,9 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Transaction(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    montant = models.FloatField()
+    montant = models.FloatField(default=0)
+    from_currency = models.CharField(max_length=15, default='BTC')
+    to_currency = models.CharField(max_length=15, default='USDT')
     code = models.TextField()
     type = models.CharField(choices=Transactions_types.items(), max_length=100)
     state = models.CharField(choices=States_types.items(), default=States_types['EN_COURS'], max_length=100)
@@ -47,6 +49,9 @@ class Currency(models.Model):
     name = models.CharField(max_length=50)
     solde = models.FloatField()
     owner_profile = models.ForeignKey(Profile, related_name='currencies', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (('name', 'owner_profile'))
 
     def __str__(self):
         return str(self.name)
