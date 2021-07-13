@@ -1,0 +1,18 @@
+mat-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+mat-drawer {
+  position: fixed;
+  min-width: 200px;
+  padding-top: 64px;
+  padding-left: 32px;
+}
+mat-drawer-content {
+  display: flex;
+  justify-content: center;
+  padding-top: 64px;
+}
+.spacer {
+  flex: 1 1 auto;
+}

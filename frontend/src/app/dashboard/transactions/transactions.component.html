@@ -1,2 +1,5 @@
 <h3>List of transactions</h3>
-<app-transaction></app-transaction>
+<app-transaction *ngFor="let transaction of transactions"
+  [class.selected]="transaction === selectedTransaction"
+  (click)="onSelect(transaction)">
+</app-transaction>
