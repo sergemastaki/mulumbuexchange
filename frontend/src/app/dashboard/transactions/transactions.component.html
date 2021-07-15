@@ -1,5 +1,45 @@
-<h3>List of transactions</h3>
-<app-transaction *ngFor="let transaction of transactions"
-  [class.selected]="transaction === selectedTransaction"
-  (click)="onSelect(transaction)">
-</app-transaction>
+<h1>Transactions</h1>
+<mat-tab-group>
+  <mat-tab label="Attente">
+    <app-transaction *ngFor="let transaction of transactions"
+      [transaction] = "transaction"
+      [class.selected]="transaction === selectedTransaction"
+      (click)="onSelect(transaction)">
+    </app-transaction>
+  </mat-tab>
+  <mat-tab label="Depot">
+    <app-transaction *ngFor="let transaction of getTransactionsOfType('DEPOT')"
+      [transaction] = "transaction"
+      [class.selected]="transaction === selectedTransaction"
+      (click)="onSelect(transaction)">
+    </app-transaction>
+  </mat-tab>
+  <mat-tab label="Retrait">
+    <app-transaction *ngFor="let transaction of getTransactionsOfType('RETRAIT')"
+      [transaction] = "transaction"
+      [class.selected]="transaction === selectedTransaction"
+      (click)="onSelect(transaction)">
+    </app-transaction>
+  </mat-tab>
+  <mat-tab label="Achat">
+    <app-transaction *ngFor="let transaction of getTransactionsOfType('ACHAT')"
+      [transaction] = "transaction"
+      [class.selected]="transaction === selectedTransaction"
+      (click)="onSelect(transaction)">
+    </app-transaction>
+  </mat-tab>
+  <mat-tab label="Vente">
+    <app-transaction *ngFor="let transaction of getTransactionsOfType('VENTE')"
+      [transaction] = "transaction"
+      [class.selected]="transaction === selectedTransaction"
+      (click)="onSelect(transaction)">
+    </app-transaction>
+  </mat-tab>
+  <mat-tab label="Swap">
+    <app-transaction *ngFor="let transaction of getTransactionsOfType('SWAP')"
+      [transaction] = "transaction"
+      [class.selected]="transaction === selectedTransaction"
+      (click)="onSelect(transaction)">
+    </app-transaction>
+  </mat-tab>
+</mat-tab-group>

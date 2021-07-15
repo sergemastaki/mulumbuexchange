@@ -1,13 +1,17 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button mat-icon-button (click)="drawer = !drawer">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Espace administrateur</span>
   <span class="spacer"></span>
+  <button mat-button>Logout</button>
 </mat-toolbar>
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened>
-    <span><strong>Navigation</strong></span>
+  <mat-drawer mode="side" [opened]="drawer">
+    <mat-nav-list>
+      <mat-list-item>Statistiques</mat-list-item>
+      <mat-list-item>Transactions</mat-list-item>
+    </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>

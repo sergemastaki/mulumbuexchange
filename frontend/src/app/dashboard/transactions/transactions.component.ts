@@ -18,6 +18,11 @@ export class TransactionsComponent implements OnInit {
           .subscribe(transactions => this.transactions = transactions);
   }
 
+  getTransactionsOfType(type: string): Transaction[] {
+    return this.transactions.filter(
+      transaction => transaction.type === type);
+  }
+
   ngOnInit(): void {
     this.getTransactions()
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Transaction } from '../transaction';
 
 @Component({
@@ -7,17 +7,7 @@ import { Transaction } from '../transaction';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-  transaction: Transaction = {
-    id: 1,
-    created: '2-2-2020',
-    code: 'ty',
-    type: 'DEPOT',
-    state: 'EN_COURS',
-    owner: 1,
-    montant: 20,
-    from_currency: 'BTC',
-    to_currency: 'USDT'
-  };
+  @Input() transaction?: Transaction
 
   constructor() { }
 

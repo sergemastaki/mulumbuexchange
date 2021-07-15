@@ -10,12 +10,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 import { AppComponent } from './app.component';
 import { TransactionsComponent } from './dashboard/transactions/transactions.component';
 import { TransactionComponent } from './dashboard/transaction/transaction.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { StatistiquesComponent } from './dashboard/statistiques/statistiques.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     TransactionsComponent,
     TransactionComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    StatistiquesComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatListModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="transaction">
   <mat-card-content>
     <mat-card-title>
       {{transaction.type}}: {{transaction.montant}} {{transaction.to_currency}}
