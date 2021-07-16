@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,13 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
   hide = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  login(): void {
+    this.router.navigateByUrl('/dashboard/transactions');
   }
 
   getEmailErrorMessage() {

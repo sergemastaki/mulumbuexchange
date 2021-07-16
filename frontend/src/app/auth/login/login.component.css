@@ -9,3 +9,6 @@ form {
 mat-form-field {
   width: 250px;
 }
+button {
+  width: 250px;
+}

@@ -4,13 +4,17 @@
   </button>
   <span>Espace administrateur</span>
   <span class="spacer"></span>
-  <button mat-button>Logout</button>
+  <button mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" [opened]="drawer">
     <mat-nav-list>
-      <mat-list-item>Statistiques</mat-list-item>
-      <mat-list-item>Transactions</mat-list-item>
+      <a routerLink="/dashboard/statistiques">
+        <mat-list-item>Statistiques</mat-list-item>
+      </a>
+      <a routerLink="/dashboard/transactions">
+        <mat-list-item>Transactions</mat-list-item>
+      </a>
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>
