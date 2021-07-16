@@ -14,4 +14,13 @@ export class TransactionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  executeTransaction(): void {
+
+  }
+
+  canBeExecuted(): boolean {
+    return this.transaction?.state == "EN_COURS" &&
+      (this.transaction?.type == "DEPOT" || this.transaction?.type == "RETRAIT");
+  }
+
 }

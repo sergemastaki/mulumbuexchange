@@ -61,7 +61,7 @@ export const TRANSACTIONS: Transaction[] = [
     created: '2-2-2019',
     code: 'ty',
     type: 'RETRAIT',
-    state: 'SWAP',
+    state: 'EXECUTER',
     owner: 1,
     montant: 20,
     from_currency: 'BTC',

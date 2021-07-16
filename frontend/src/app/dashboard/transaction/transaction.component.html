@@ -1,11 +1,23 @@
-<mat-card *ngIf="transaction">
-  <mat-card-content>
-    <mat-card-title>
-      {{transaction.type}}: {{transaction.montant}} {{transaction.to_currency}}
-    </mat-card-title>
-    <mat-card-subtitle>
-      Date: {{transaction.created}}
-    </mat-card-subtitle>
-    Source currency: {{transaction.from_currency}} - Destination currency: {{transaction.to_currency}}
-  </mat-card-content>
-</mat-card>
+<div *ngIf="transaction">
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>
+        {{transaction.type}}: {{transaction.montant}} {{transaction.to_currency}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Date: {{transaction.created}}
+      </mat-card-subtitle>
+      Source currency: {{transaction.from_currency}} - Destination currency: {{transaction.to_currency}}
+    </mat-card-content>
+  </mat-card>
+  <mat-expansion-panel *ngIf="canBeExecuted()">
+     <mat-expansion-panel-header>
+       <mat-panel-title>
+        Actions
+       </mat-panel-title>
+     </mat-expansion-panel-header>
+      <button mat-flat-button color="primary" (click)="executeTransaction()">
+        Executer le {{transaction.type}}
+      </button>
+   </mat-expansion-panel>
+</div>

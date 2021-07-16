@@ -8,27 +8,8 @@ import { TransactionService } from '../transaction.service';
   styleUrls: ['./transactions.component.css']
 })
 export class TransactionsComponent implements OnInit {
-  transactions : Transaction[] = [];
-  selectedTransaction?: Transaction;
 
-  constructor(private transactionService: TransactionService) { }
+  constructor() { }
 
-  getTransactions(): void {
-    this.transactionService.getTransactions()
-          .subscribe(transactions => this.transactions = transactions);
-  }
-
-  getTransactionsOfType(type: string): Transaction[] {
-    return this.transactions.filter(
-      transaction => transaction.type === type);
-  }
-
-  ngOnInit(): void {
-    this.getTransactions()
-  }
-
-  onSelect(transaction: Transaction): void {
-    this.selectedTransaction = transaction;
-  }
-
+  ngOnInit(): void { }
 }
