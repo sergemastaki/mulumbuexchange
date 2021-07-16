@@ -2,15 +2,26 @@ h1 {
   margin-top: 16px;
   margin-left: 100px;
 }
-mat-card {
+.overview {
   width: 250px;
   height: 64px;
   margin: 8px;
+  cursor: pointer;
 }
 .main {
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: flex-start;
+}
+.details {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+}
+.more {
+  min-width: 400px;
+  margin: 32px 8px 8px 8px;
 }
