@@ -1,2 +1,21 @@
-<h3>List of transactions</h3>
-<app-transaction></app-transaction>
+<h1>Transactions</h1>
+<mat-tab-group>
+  <mat-tab label="Attente">
+    <app-list-transactions [type]="'ATTENTE'"></app-list-transactions>
+  </mat-tab>
+  <mat-tab label="Depot">
+    <app-list-transactions [type]="'DEPOT'"></app-list-transactions>
+  </mat-tab>
+  <mat-tab label="Retrait">
+    <app-list-transactions [type]="'RETRAIT'"></app-list-transactions>
+  </mat-tab>
+  <mat-tab label="Achat">
+    <app-list-transactions [type]="'ACHAT'"></app-list-transactions>
+  </mat-tab>
+  <mat-tab label="Vente">
+    <app-list-transactions [type]="'VENTE'"></app-list-transactions>
+  </mat-tab>
+  <mat-tab label="Swap">
+    <app-list-transactions [type]="'SWAP'"></app-list-transactions>
+  </mat-tab>
+</mat-tab-group>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Transaction } from '../transaction';
+import { Transaction } from '../transaction'
+import { TransactionService } from '../transaction.service';
 
 @Component({
   selector: 'app-transactions',
@@ -10,7 +11,5 @@ export class TransactionsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

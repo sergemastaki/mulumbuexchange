@@ -1,0 +1,68 @@
+<h1>Statistiques</h1>
+<div class="main">
+  <mat-card class="overview">
+    <mat-card-header>
+      <mat-card-title>Nombre d'utilisateurs</mat-card-title>
+      <mat-card-title>50</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="overview" (click)="onSelectedTransaction('TRANSACTIONS')">
+    <mat-card-header>
+      <mat-card-title>Nombre de transactions</mat-card-title>
+      <mat-card-title>20</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="overview" (click)="onSelectedTransaction('DEPOT')">
+    <mat-card-header>
+      <mat-card-title>Nombre de depots</mat-card-title>
+      <mat-card-title>7</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="overview" (click)="onSelectedTransaction('RETRAIT')">
+    <mat-card-header>
+      <mat-card-title>Nombre de retraits</mat-card-title>
+      <mat-card-title>2</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="overview" (click)="onSelectedTransaction('ACHAT')">
+    <mat-card-header>
+      <mat-card-title>Nombre d'achats</mat-card-title>
+      <mat-card-title>2</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="overview" (click)="onSelectedTransaction('VENTE')">
+    <mat-card-header>
+      <mat-card-title>Nombre de ventes</mat-card-title>
+      <mat-card-title>3</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="overview" (click)="onSelectedTransaction('SWAP')">
+    <mat-card-header>
+      <mat-card-title>Nombre de swaps</mat-card-title>
+      <mat-card-title>1</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>
+<div class="details">
+  <mat-card class="more">
+    <mat-card-header>
+      <mat-card-title>
+        Nombre de {{ selected | lowercase }} par currency
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="more">
+    <mat-card-header>
+      <mat-card-title>
+        Graphique {{ selected | lowercase }}
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>
