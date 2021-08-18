@@ -4,6 +4,7 @@ from api import views
 from rest_framework.authtoken import views as authtoken_views
 
 urlpatterns = [
+    path('orders/', views.OrderList.as_view()),
     path('transactions/', views.TransactionList.as_view()),
     path('transactions/<int:pk>/', views.TransactionDetail.as_view()),
     path('transactions/<int:pk>/execute', views.TransactionExecution.as_view()),

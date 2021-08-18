@@ -33,6 +33,15 @@ class TransactionList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+class OrderList(generics.ListAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+    def list(self, request):
+        transactions = self.queryset.all()
+        serializer = TransactionSerializer(transactions, many=True)
+        return Response(serializer.data)
+
 class TransactionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
