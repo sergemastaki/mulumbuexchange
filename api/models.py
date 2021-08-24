@@ -38,7 +38,7 @@ class Transaction(models.Model):
     moyen = models.CharField(max_length=15, default='')
     account_number = models.CharField(max_length=30, default='')
     wallet = models.CharField(max_length=100, default='')
-    code = models.TextField()
+    code = models.TextField(default='')
     type = models.CharField(choices=Transactions_types.items(), max_length=100)
     state = models.CharField(choices=States_types.items(), default=States_types['EN_COURS'], max_length=100)
     owner = models.ForeignKey('auth.User', related_name='transactions', on_delete=models.CASCADE)
