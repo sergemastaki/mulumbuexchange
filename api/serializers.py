@@ -17,7 +17,8 @@ class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ('id', 'created', 'code', 'type',
-                  'state', 'owner', 'montant',
+                  'state', 'owner', 'montant', 'wallet',
+                  'tx_id', 'moyen', 'account_number',
                   'from_currency', 'to_currency')
 
     def can_be_performed_by(self, user):
