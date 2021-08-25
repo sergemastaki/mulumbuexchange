@@ -3,9 +3,14 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, permissions, status
-from .models import Transaction, Profile
+from .models import Transaction, Profile, Currency, Currencies
 from .permissions import IsOwner, IsOwnerOrReadOnly, IsAdminUser
-from .serializers import TransactionSerializer, UserSerializer, UserRegistrationInfoSerializer
+from .serializers import (
+    TransactionSerializer,
+    UserSerializer,
+    UserRegistrationInfoSerializer,
+    CurrencySerializer
+)
 
 
 class TransactionList(generics.ListCreateAPIView):
@@ -32,6 +37,28 @@ class TransactionList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+class CurrencyList(generics.ListCreateAPIView):
+    queryset = Currency.objects.all()
+    serializer_class = CurrencySerializer
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def list(self, request):
+        currencies = request.user.currencies
+        serializer = CurrencySerializer(currencies, many=True)
+        self.add_currencies_not_on_user_list(serializer)
+        return Response(serializer.data)
+
+    def add_currencies_not_on_user_list(self, serializer):
+        user_currencies_codes = [currency['name'] for currency in serializer.data]
+        for currency in Currencies:
+            if currency['code'] not in user_currencies_codes:
+                self.perform_create(currency)
+
+    def perform_create(self, data):
+        serializer = CurrencySerializer(data={'name': data['code']})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(owner=self.request.user)
 
 class OrderList(generics.ListAPIView):
     queryset = Transaction.objects.all()

@@ -5,6 +5,7 @@ from django.dispatch import receiver
 
 Transactions_types = {'DEPOT':'depot','RETRAIT':'retrait','VENTE':'vente','ACHAT':'achat','SWAP':'swap'}
 States_types = {'EN_COURS':'en_cours', 'EXECUTER':'executer', 'ANNULER':'annuler'}
+Currencies = [{'code':'BTC'}, {'code':'ETH'}, {'code':'BNB'}, {'code':'USDT'}, {'code':'AVAX'}, {'code':'DOT'}, {'code':'USD'}]
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
@@ -50,12 +51,12 @@ class Transaction(models.Model):
         return str(self.type)
 
 class Currency(models.Model):
-    name = models.CharField(max_length=50)
-    solde = models.FloatField()
-    owner_profile = models.ForeignKey(Profile, related_name='currencies', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, default='USD')
+    solde = models.FloatField(default=0)
+    owner = models.ForeignKey('auth.User', related_name='currencies', on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
-        unique_together = (('name', 'owner_profile'))
+        unique_together = (('name', 'owner'))
 
     def __str__(self):
         return str(self.name)

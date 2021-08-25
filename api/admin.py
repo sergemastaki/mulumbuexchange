@@ -11,5 +11,5 @@ class ProfileAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Transaction)
-admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Profile)
 admin.site.register(Currency)

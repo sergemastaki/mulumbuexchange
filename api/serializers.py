@@ -22,7 +22,17 @@ class TransactionSerializer(serializers.ModelSerializer):
                   'from_currency', 'to_currency')
 
     def can_be_performed_by(self, user):
-        return True
+        if self.type == Transactions_types["DEPOT"]:
+            return True
+        if self.type == Transactions_types["RETRAIT"]:
+            return True
+        if self.type == Transactions_types["SWAP"]:
+            return True
+        if self.type == Transactions_types["ACHAT"]:
+            return True
+        if self.type == Transactions_types["VENTE"]:
+            return True
+        return False
 
     def can_be_executed_by(self, user):
         return True
@@ -71,14 +81,10 @@ class UserRegistrationInfoSerializer(serializers.ModelSerializer):
                   )
 
 class CurrencySerializer(serializers.ModelSerializer):
-    owner_profile = serializers.ReadOnlyField(source='owner_profile.id')
+    owner = serializers.ReadOnlyField(source='owner_profile.id')
 
     class Meta:
         model = Currency
-        fields = ('id', 'name', 'solde', 'owner_profile')
-        validators = [
-            UniqueTogetherValidator(
-                queryset=Currency.objects.all(),
-                fields=['name', 'owner_profile']
-            )
-        ]
+        fields = ('id', 'name', 'solde', 'owner')
+        extra_kwargs = {'owner': {'required': False}}
+        validators = []
