@@ -33,6 +33,7 @@ def save_user_profile(sender, instance, **kwargs):
 class Transaction(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     montant = models.FloatField(default=0)
+    taux = models.FloatField(default=1)
     from_currency = models.CharField(max_length=15, default='BTC')
     to_currency = models.CharField(max_length=15, default='USDT')
     tx_id = models.CharField(max_length=100, default='')
