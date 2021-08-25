@@ -30,10 +30,11 @@ class TransactionList(generics.ListCreateAPIView):
 
     def create(self, request):
         serializer = TransactionSerializer(data=request.data)
-        if serializer.is_valid() and serializer.can_be_performed_by(request.user):
+        currencies_serializer = CurrencySerializer(request.user.currencies, many=True)
+        if serializer.is_valid() and serializer.can_be_performed_by(currencies_serializer):
             self.perform_create(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"solde": "Insuffisant"}, status=status.HTTP_400_BAD_REQUEST)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

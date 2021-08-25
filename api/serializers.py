@@ -16,21 +16,35 @@ class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = ('id', 'created', 'code', 'type',
+        fields = ('id', 'created', 'code', 'type', 'taux',
                   'state', 'owner', 'montant', 'wallet',
                   'tx_id', 'moyen', 'account_number',
                   'from_currency', 'to_currency')
 
-    def can_be_performed_by(self, user):
-        if self.type == Transactions_types["DEPOT"]:
+    def get_currency(self, currency_name, currencies):
+        for currency in currencies.data:
+            if currency['name'] == currency_name:
+                return currency
+        return None
+
+    def can_be_performed_by(self, currencies):
+        if self.validated_data["type"].lower() == Transactions_types["DEPOT"]:
             return True
-        if self.type == Transactions_types["RETRAIT"]:
+        if (self.validated_data["type"].lower() == Transactions_types["RETRAIT"] or
+            self.validated_data["type"].lower() == Transactions_types["SWAP"]):
+            currency = self.get_currency(self.validated_data["from_currency"], currencies)
+            if self.validated_data["montant"] > currency["solde"]:
+                return False
             return True
-        if self.type == Transactions_types["SWAP"]:
+        if self.validated_data["type"].lower() == Transactions_types["ACHAT"]:
+            currency = self.get_currency('USDT', currencies)
+            if self.validated_data["montant"] * self.validated_data["taux"] > currency["solde"]:
+                return False
             return True
-        if self.type == Transactions_types["ACHAT"]:
-            return True
-        if self.type == Transactions_types["VENTE"]:
+        if self.validated_data["type"].lower() == Transactions_types["VENTE"]:
+            currency = self.get_currency(self.validated_data["from_currency"], currencies)
+            if self.validated_data["montant"] > currency["solde"]:
+                return False
             return True
         return False
 
