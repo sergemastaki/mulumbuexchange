@@ -99,6 +99,9 @@ class UserRegistrationInfoSerializer(serializers.ModelSerializer):
                   'profile',
                   )
 
+class CurrencyTypeSerializer(serializers.Serializer):
+    code = serializers.CharField(max_length=20)
+
 class CurrencySerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner_profile.id')
 

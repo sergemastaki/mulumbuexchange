@@ -9,9 +9,14 @@ from .serializers import (
     TransactionSerializer,
     UserSerializer,
     UserRegistrationInfoSerializer,
-    CurrencySerializer
+    CurrencySerializer,
+    CurrencyTypeSerializer
 )
 
+class CurrencyTypeList(APIView):
+    def get(self, request, format=None):
+        serializer = CurrencyTypeSerializer(Currencies, many=True)
+        return Response(serializer.data)
 
 class TransactionList(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
