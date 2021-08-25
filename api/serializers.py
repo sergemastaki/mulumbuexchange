@@ -54,13 +54,18 @@ class TransactionSerializer(serializers.ModelSerializer):
     def execute(self, user):
         pass
 
+class MinimumProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = ('id', 'numero')
+
 class UserSerializer(serializers.ModelSerializer):
-    transactions = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Transaction.objects.all())
+    profile = MinimumProfileSerializer(read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'profile', 'transactions')
+        fields = ('id', 'username', 'email', 'profile')
 
 class ProfileSerializer(serializers.ModelSerializer):
 
