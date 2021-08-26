@@ -71,8 +71,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'numero', 'user', 'currencies')
-        read_only_fields = ('currencies', 'user')
+        fields = ('id', 'numero', 'user')
+        read_only_fields = ('id', 'user')
 
 class UserRegistrationInfoSerializer(serializers.ModelSerializer):
     username = serializers.CharField(validators=[UniqueValidator(queryset=User.objects.all())])
@@ -86,7 +86,9 @@ class UserRegistrationInfoSerializer(serializers.ModelSerializer):
             username=validated_data['username']
         )
         user.set_password(validated_data['password'])
-        user.profile.numero = validated_data['profile']['numero']
+        profile = Profile.objects.create(user=user, numero=validated_data['profile']['numero'])
+        profile.save()
+        user.profile = profile
         user.save()
         return user
 
