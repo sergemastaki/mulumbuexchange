@@ -3,7 +3,7 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, permissions, status
-from .models import Transaction, Profile, Currency, Currencies
+from .models import Transaction, Profile, Currency, Currencies, Transactions_types, States_types
 from .permissions import IsOwner, IsOwnerOrReadOnly, IsAdminUser
 from .serializers import (
     TransactionSerializer,
@@ -67,7 +67,7 @@ class CurrencyList(generics.ListCreateAPIView):
             serializer.save(owner=self.request.user)
 
 class OrderList(generics.ListAPIView):
-    queryset = Transaction.objects.all()
+    queryset = Transaction.objects.filter(type__in=['VENTE','ACHAT'], state='EN_COURS')
     serializer_class = TransactionSerializer
 
     def list(self, request):
