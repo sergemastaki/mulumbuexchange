@@ -21,6 +21,15 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
 
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance, numero="+2430000000")
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
 class Transaction(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     montant = models.FloatField(default=0)
