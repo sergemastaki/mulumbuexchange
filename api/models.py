@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 Transactions_types = {'DEPOT':'depot','RETRAIT':'retrait','VENTE':'vente','ACHAT':'achat','SWAP':'swap'}
 States_types = {'EN_COURS':'en_cours', 'EXECUTER':'executer', 'ANNULER':'annuler'}
-Currencies = [{'code':'BTC'}, {'code':'ETH'}, {'code':'BNB'}, {'code':'USDT'}, {'code':'AVAX'}, {'code':'DOT'}, {'code':'USD'}]
+Currencies = [{'code':'BTC'}, {'code':'ETH'}, {'code':'BNB'}, {'code':'USDT'}, {'code':'AVAX'}, {'code':'DOT'}, {'code':'USD'}, {'code':'TRX'}]
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
